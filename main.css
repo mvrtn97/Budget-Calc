@@ -1,0 +1,117 @@
+body {
+  background-color: #faf3ef4d;
+}
+
+.total-count {
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+.app {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 40%;
+  border: 1px solid black;
+  word-break: break-all;
+}
+
+.budget-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.expenses-input {
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  margin: auto;
+  font-family: 'Amatic SC', cursive;
+  font-size: 70px;
+}
+
+h3 {
+  font-family: 'Amatic SC', cursive;
+  font-size: 30px;
+}
+
+div {
+  padding: 20px;
+}
+
+input {
+  margin: 10px;
+  padding: 5px;
+}
+
+button {
+  margin-right: 40%;
+  margin-left: 40%;
+  background-color:antiquewhite;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: white;
+}
+
+
+.expense-list h1 {
+  margin: auto;
+  text-align: center;
+}
+
+.expense-ul {
+  padding: 0;
+}
+
+.expense-li {
+  justify-content:end;
+  list-style-type: none;
+  display: flex;
+  font-size: 18px;
+  padding: 8px;
+}
+
+.expense-li2 {
+  justify-content:end;
+  list-style-type: none;
+  display: flex;
+  font-size: 18px;
+  padding: 8px;
+}
+
+.expense-li2 .edit-btn {
+  margin-left: auto;
+}
+
+.li-text {
+  margin-right: auto;
+}
+
+.edit-btn,
+.del-btn {
+  height: 32px;
+  width: auto;
+}
+
+.edit-btn {
+  margin: 0;
+  padding-right: 5px;
+}
+
+.del-btn {
+  margin: 0;
+  padding-left: 5px;
+}
+
+#curInput {
+  width: 8%;
+  margin-left: auto;
+}
+

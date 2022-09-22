@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="main.css">
+  <title>Budget Calc 1.0</title>
+</head>
+<body>
+  <div class="app">
+    <div class="container">
+
+      <div class="budget-input">
+        <h1>Budget</h1>
+        <input type="text" placeholder="Enter Total Amount" id="totalAmountInput">
+        <input list="currencies" name="currency" placeholder="CUR" id="curInput">
+          <datalist id="currencies">
+            
+          </datalist>
+        </input>
+        <button type="submit" id="addBudgetBtn">Set budget</button>
+      </div>
+      <div class="expenses-input">
+        <h1>Expenses</h1>
+        <input type="text" placeholder="Enter the title of product" id="titleInput">
+        <input type="text" placeholder="Enter the cost of product" id="costInput">
+        <button type="submit" id="addExpenseBtn">Add to list</button>
+      </div>
+      <div class="total-count">
+        <div class="budget-count">
+          <h3>Total Budget</h3>
+          <p id="budgetCount"></p>
+        </div>
+        <div class="expenses-count">
+          <h3>Expenses</h3>
+          <p id="expenseCount"></p>
+        </div>
+        <div class="balance-count">
+          <h3>Balance</h3>
+          <p id="balanceCount"></p>
+        </div>
+      </div>
+      <div class="expense-list">
+        <h1>Expense list</h1>
+        <ul class="expense-ul">
+
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
