@@ -36,7 +36,7 @@ const addBudget = () => {
     for([key, value] of Object.entries(res.rates)){
         if (curInput.value === key) {
           budgetValue *= value;
-          budgetCount.innerHTML = budgetValue;
+          budgetCount.innerHTML = budgetValue + key;
         }
       } 
   });
