@@ -10,34 +10,45 @@ const expenseCount = document.getElementById('expenseCount');
 const balanceCount = document.getElementById('balanceCount');
 const expenseUl = document.querySelector('ul');
 const curList = document.getElementById('currencies');
-const API_URL = 'https://api.exchangerate.host/latest';
+const curInput = document.getElementById('curInput');
+const API_URL = "https://api.exchangerate.host/latest?base=PLN";
 
 let currencies = [];
 
 fetch(API_URL)
   .then((res) => res.json())
   .then((res) => {
-    for(key in res) {
-        let curListItem = document.createElement('option');
-        curListItem.innerHTML = res.rates;
-        curList.append(curListItem);
-        console.log(res.rates);
-  }
+      for (key of Object.keys(res.rates)) {
+          let curListItem = document.createElement('option');
+          curListItem.innerHTML = key;
+          curList.append(curListItem);
+    }
   });
-
-
 
 let budgetVal = [];
 
 const addBudget = () => {
   let budgetValue = parseInt(totalAmountInput.value);
+
+  fetch(API_URL)
+  .then((res) => res.json())
+  .then((res) => {
+    for([key, value] of Object.entries(res.rates)){
+        if (curInput.value === key) {
+          budgetValue *= value;
+          budgetCount.innerHTML = budgetValue;
+        }
+      } 
+  });
+
   budgetVal.push(budgetValue);
-  budgetCount.innerHTML= budgetValue + 'zl';
+  
   totalAmountInput.value = '';
 
   if(budgetValue !== budgetVal[budgetVal.slice(-1)]){
     balanceCount.innerHTML = budgetVal.slice(-1)[0] - count;
   }
+
 };
 
 let count = 0;
@@ -94,6 +105,7 @@ const addExpense = () => {
   editBtn.addEventListener('click', editHandler);
   delBtn.addEventListener('click', deleteHandler);
 };
+
 
 addBudgetBtn.addEventListener('click', addBudget);
 addExpenseBtn.addEventListener('click', addExpense);
