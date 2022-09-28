@@ -56,6 +56,13 @@ const addBudget = () => {
 
 };
   }
+  totalAmountInput.addEventListener("keydown", function(event){
+    if(event.key === "Enter"){
+      addBudget();
+      event.preventDefault(); /* aby nie refreshowalo strony */
+      return false;
+    }
+  })
 
 
 let count = 0;
@@ -139,6 +146,14 @@ const addExpense = () => {
 editBtn.addEventListener('click', editHandler);
 delBtn.addEventListener('click', deleteHandler);
 }
+
+costInput.addEventListener("keydown", function(event){
+  if(event.key === "Enter"){
+    addExpense();
+    event.preventDefault(); /* aby nie refreshowalo strony */
+    return false;
+  }
+})
 
 
 

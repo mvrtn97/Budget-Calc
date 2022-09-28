@@ -113,7 +113,7 @@ button:hover {
 
 #curInput {
   margin-left: auto;
-  
+  min-width: 210px;
 }
 
 html {
