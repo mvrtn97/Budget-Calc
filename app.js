@@ -30,8 +30,8 @@ let budgetVal = [];
 const addBudget = () => {
   let budgetValue = parseInt(totalAmountInput.value);
 
-  if(totalAmountInput.value === "") {
-    alert('Enter some value');
+  if(totalAmountInput.value === "" || curInput.value === "") {
+    alert('Enter missing value');
   }
   else {
     fetch(API_URL)
