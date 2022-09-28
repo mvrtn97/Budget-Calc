@@ -30,13 +30,18 @@ let budgetVal = [];
 const addBudget = () => {
   let budgetValue = parseInt(totalAmountInput.value);
 
-  fetch(API_URL)
-  .then((res) => res.json())
-  .then((res) => {
-    for([key, value] of Object.entries(res.rates)){
-        if (curInput.value === key) {
-          budgetValue *= value;
-          budgetCount.innerHTML = budgetValue + key;
+  if(totalAmountInput.value === "") {
+    alert('Enter some value');
+  }
+  else {
+    fetch(API_URL)
+      .then((res) => res.json())
+      .then((res) => {
+        for([key, value] of Object.entries(res.rates)){
+          if (curInput.value === key) {
+            budgetValue *= value;
+            budgetCount.innerHTML = budgetValue.toFixed(2) + ' ' + key;
+            balanceCount.innerHTML = ((budgetVal.slice(-1)[0]*value) - count).toFixed(2) + ' ' + key;
         }
       } 
   });
@@ -50,6 +55,8 @@ const addBudget = () => {
   }
 
 };
+  }
+
 
 let count = 0;
 const addExpense = () => {
@@ -64,49 +71,76 @@ const addExpense = () => {
   delBtn.className = 'del-btn';
   newLi.className = 'expense-li';
 
-  newLi.innerHTML = `<span class="li-text">${itemTitle} - ${itemCost}zl</span>`;
-  newLi.appendChild(editBtn);
-  newLi.appendChild(delBtn);
-  expenseUl.insertAdjacentElement("beforeend", newLi);
+  fetch(API_URL)
+  .then((res) => res.json())
+  .then((res) => {
+    for([key, value] of Object.entries(res.rates)){
+        if (curInput.value === key) {
+          newLi.innerHTML = `<span class="li-text">${itemTitle} - ${itemCost.toFixed(2)} ${key}</span>`;
+          newLi.appendChild(editBtn);
+          newLi.appendChild(delBtn);
+          expenseUl.insertAdjacentElement("beforeend", newLi);
 
-  count += itemCost;
-  expenseCount.innerHTML = count;
+          count += itemCost;
+          expenseCount.innerHTML = count.toFixed(2) + ' ' + key;
   
-  balanceCount.innerHTML = budgetVal.slice(-1)[0] - count;
+          balanceCount.innerHTML = ((budgetVal.slice(-1)[0]*value) - count).toFixed(2) + ' ' + key;
+        }
+      } 
+  });
 
   titleInput.value = '';
   costInput.value = '';
 
   const editHandler = (e) => {
     let itemToEdit = e.target.closest('li');
-      do{
-        count -= itemCost;
-        balanceCount.innerHTML = budgetVal.slice(-1)[0] + count;
-        itemTitle = window.prompt("Enter the new expense");
-        itemCost = window.prompt("Enter the new cost");
-        count += parseInt(itemCost);
-        expenseCount.innerHTML = count;
-        balanceCount.innerHTML = budgetVal.slice(-1)[0] - count;
-        itemToEdit.innerHTML = `<span class="li-text">${itemTitle} - ${itemCost}zl</span>`;
+
+    fetch(API_URL)
+    .then((res) => res.json())
+    .then((res) => {
+      for([key, value] of Object.entries(res.rates)){
+          if (curInput.value === key) {
+            do{
+              count -= itemCost;
+              balanceCount.innerHTML = budgetVal.slice(-1)[0] + count;
+              itemTitle = window.prompt("Enter the new expense");
+              itemCost = window.prompt("Enter the new cost");
+              count += parseInt(itemCost);
+              expenseCount.innerHTML = count + ' ' + key;
+              balanceCount.innerHTML = ((budgetVal.slice(-1)[0]*value) - count).toFixed(2) + ' ' + key;
+              itemToEdit.innerHTML = `<span class="li-text">${itemTitle} - ${itemCost} ${key}</span>`;
+            }
+            while(itemToEdit.innerHTML === "");
+            itemToEdit.appendChild(editBtn);
+            itemToEdit.appendChild(delBtn);
+        }
       }
-      while(itemToEdit.innerHTML === "");
-      itemToEdit.appendChild(editBtn);
-      itemToEdit.appendChild(delBtn);
-  };
+    }
+  )} 
+
+
 
   const deleteHandler = (e) => {
     let itemToDelete = e.target.closest('li');
-    expenseUl.removeChild(itemToDelete);
-    count -= itemCost;
-    balanceCount.innerHTML = budgetVal.slice(-1)[0] + count;
-    expenseCount.innerHTML = count;
-  };
 
-  editBtn.addEventListener('click', editHandler);
-  delBtn.addEventListener('click', deleteHandler);
+    fetch(API_URL)
+    .then((res) => res.json())
+    .then((res) => {
+      for([key, value] of Object.entries(res.rates)){
+        if (curInput.value === key) {
+          expenseUl.removeChild(itemToDelete);
+          count -= itemCost;
+          balanceCount.innerHTML = ((budgetVal.slice(-1)[0]*value) - count).toFixed(2) + ' ' + key;
+          expenseCount.innerHTML = count + ' ' + key;
+        }
+      }
+    })
 };
+editBtn.addEventListener('click', editHandler);
+delBtn.addEventListener('click', deleteHandler);
+}
+
 
 
 addBudgetBtn.addEventListener('click', addBudget);
 addExpenseBtn.addEventListener('click', addExpense);
-

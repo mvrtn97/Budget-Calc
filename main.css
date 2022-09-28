@@ -17,6 +17,7 @@ body {
   width: 40%;
   border: 1px solid black;
   word-break: break-all;
+  background-color: white;
 }
 
 .budget-input {
@@ -52,12 +53,12 @@ input {
 button {
   margin-right: 40%;
   margin-left: 40%;
-  background-color:antiquewhite;
   cursor: pointer;
 }
 
 button:hover {
   background-color: white;
+  transform: scale(105%);
 }
 
 
@@ -111,7 +112,15 @@ button:hover {
 }
 
 #curInput {
-  width: 25%;
   margin-left: auto;
+  
+}
+
+html {
+  background-image: url(../../traveljpg.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 1200px;
 }
 
